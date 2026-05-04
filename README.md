@@ -91,9 +91,6 @@ Noise + missing + bias together
 
 ---
 
-
----
-
 ## Why this project
 
 Most projects focus on building models.
