@@ -6,7 +6,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
 # Load data
-df = pd.read_csv("data/headlines.csv")
+df = pd.read_csv("data/sentences.csv")
 
 # Add noise function
 def add_noise(text, noise_level=0.3):
@@ -20,11 +20,11 @@ def add_noise(text, noise_level=0.3):
     return " ".join(words)
 
 # Apply noise
-df["noisy"] = df["text"].apply(lambda x: add_noise(x, 0.3))
+df["noisy"] = df["sentence"].apply(lambda x: add_noise(x, 0.3))
 
 # Vectorize
 vectorizer = TfidfVectorizer()
-X = vectorizer.fit_transform(df["text"])
+X = vectorizer.fit_transform(df["sentence"])
 X_noisy = vectorizer.transform(df["noisy"])
 
 # Similarity
@@ -34,7 +34,7 @@ scores = similarity.diagonal()
 # Print results
 print("\nOriginal vs Noisy Similarity:\n")
 for i, score in enumerate(scores):
-    print(f"{df['text'][i][:40]}... → {score:.3f}")
+    print(f"{df['sentence'][i][:40]}... → {score:.3f}")
 
 # Plot
 plt.figure()
