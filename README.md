@@ -30,8 +30,8 @@ More specifically:
 
 ## Methodology
 
-The experiments use short headline-style sentences from
-[`data/headlines.csv`](data/headlines.csv). Each sentence is treated as the
+The experiments use short sample sentences from
+[`data/sentences.csv`](data/sentences.csv). Each sentence is treated as the
 clean reference signal.
 
 Distorted versions are generated using three techniques:
@@ -147,7 +147,8 @@ signal-vs-noise/
 │   ├── 03-bias-distortion.md
 │   └── 04-system-breakdown.md
 ├── data/
-│   └── headlines.csv
+│   ├── headlines.csv
+│   └── sentences.csv
 ├── experiments/
 │   ├── exp1_noise.py
 │   ├── exp2_missing.py
