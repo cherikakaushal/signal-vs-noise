@@ -1,6 +1,6 @@
-"""Find the distortion level at which headline meaning collapses.
+"""Find the distortion level at which sentence meaning collapses.
 
-The experiment progressively alters a fixed share of each headline's words.
+The experiment progressively alters a fixed share of each sentence's words.
 Altered words are evenly assigned to deletion, neutral noise, and biased
 replacement. Meaning is approximated with TF-IDF cosine similarity, matching
 the earlier experiments in this project.
@@ -27,7 +27,7 @@ DISTORTION_LEVELS = np.arange(0.0, 1.01, 0.05)
 BIAS_WORDS = ("crisis", "failure", "collapse")
 
 ROOT = Path(__file__).resolve().parents[1]
-DATA_PATH = ROOT / "data" / "headlines.csv"
+DATA_PATH = ROOT / "data" / "sentences.csv"
 OUTPUT_PATH = ROOT / "visuals" / "failure_threshold.png"
 
 
@@ -160,7 +160,7 @@ def plot_results(
 
 
 def main() -> None:
-    texts = pd.read_csv(DATA_PATH)["text"].dropna().astype(str).tolist()
+    texts = pd.read_csv(DATA_PATH)["sentence"].dropna().astype(str).tolist()
     levels, means, standard_deviations = run_experiment(texts)
     threshold = first_collapse_level(levels, means)
     plot_results(levels, means, standard_deviations, threshold)
