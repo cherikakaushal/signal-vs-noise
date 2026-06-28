@@ -27,6 +27,7 @@ More specifically:
 - Can biased language shift interpretation without total failure?
 - Do combined distortions produce linear or non-linear breakdown?
 - What distortion level marks the beginning of semantic collapse?
+- Can too much irrelevant information be as harmful as missing information?
 
 ## Methodology
 
@@ -105,6 +106,26 @@ where mean similarity fell below the 0.50 collapse criterion.
 - Code: [`experiments/exp5_threshold.py`](experiments/exp5_threshold.py)
 - Output: [`visuals/failure_threshold.png`](visuals/failure_threshold.png)
 
+### 6. Information Overload
+
+Irrelevant information is appended to each original sentence at increasing
+multiples of the sentence length.
+
+Result: meaning degraded even though the original sentence remained present.
+Extra unrelated content diluted the signal and made the sentence representation
+less similar to the original.
+
+- Code: [`experiments/exp6_information_overload.py`](experiments/exp6_information_overload.py)
+- Output: [`visuals/information_overload.png`](visuals/information_overload.png)
+
+## Blogs
+
+- [What happens when context is missing?](blogs/02-missing-context.md)
+- [What happens when information becomes biased?](blogs/03-bias-distortion.md)
+- [When does a system actually break?](blogs/04-system-breakdown.md)
+- [At what point does meaning collapse?](blogs/05-failure-threshold.md)
+- [Can too much information become noise?](blogs/06-information-overload.md)
+
 ## Results
 
 The experiments show that meaning does not fail in one uniform way. Some
@@ -112,6 +133,8 @@ distortions erode meaning slowly, while others remove essential context or shift
 interpretation before the sentence appears fully broken.
 
 Visual summaries:
+
+![Overall distortion comparison](visuals/overall_distortion_comparison.png)
 
 ![Noise similarity](visuals/noise_similarity.png)
 
@@ -123,6 +146,8 @@ Visual summaries:
 
 ![Failure threshold](visuals/failure_threshold.png)
 
+![Information overload](visuals/information_overload.png)
+
 ## Key Findings
 
 - Noise injection caused gradual degradation.
@@ -130,6 +155,10 @@ Visual summaries:
 - Bias injection changed framing without immediate collapse.
 - Combined distortion produced non-linear failure.
 - Threshold analysis found collapse around 65% distortion.
+- Information overload showed that excess irrelevant context can also weaken
+  meaning.
+- The overall comparison figure shows all five core distortion experiments in
+  one view.
 
 See [`analysis/findings.md`](analysis/findings.md) for the concise findings
 summary.
@@ -145,7 +174,9 @@ signal-vs-noise/
 │   ├── 01-signal-vs-noise.md
 │   ├── 02-missing-context.md
 │   ├── 03-bias-distortion.md
-│   └── 04-system-breakdown.md
+│   ├── 04-system-breakdown.md
+│   ├── 05-failure-threshold.md
+│   └── 06-information-overload.md
 ├── data/
 │   ├── headlines.csv
 │   └── sentences.csv
@@ -154,12 +185,16 @@ signal-vs-noise/
 │   ├── exp2_missing.py
 │   ├── exp3_bias.py
 │   ├── exp4_combined.py
-│   └── exp5_threshold.py
+│   ├── exp5_threshold.py
+│   ├── exp6_information_overload.py
+│   └── summary_distortion_comparison.py
 ├── visuals/
 │   ├── bias_effect.png
 │   ├── failure_threshold.png
+│   ├── information_overload.png
 │   ├── missing_context.png
 │   ├── noise_similarity.png
+│   ├── overall_distortion_comparison.png
 │   └── system_breakdown.png
 └── README.md
 ```
