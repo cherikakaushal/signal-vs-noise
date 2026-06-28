@@ -6,7 +6,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
 # Load data
-df = pd.read_csv("data/headlines.csv")
+df = pd.read_csv("data/sentences.csv")
 
 # Noise
 def add_noise(text, level=0.3):
@@ -43,14 +43,14 @@ def apply_all(text):
     text = add_bias(text)
     return text
 
-df["combined"] = df["text"].apply(apply_all)
+df["combined"] = df["sentence"].apply(apply_all)
 
 # Vectorize properly
 vectorizer = TfidfVectorizer()
-combined_data = pd.concat([df["text"], df["combined"]])
+combined_data = pd.concat([df["sentence"], df["combined"]])
 vectorizer.fit(combined_data)
 
-X = vectorizer.transform(df["text"])
+X = vectorizer.transform(df["sentence"])
 X_combined = vectorizer.transform(df["combined"])
 
 # Similarity
@@ -60,7 +60,7 @@ scores = similarity.diagonal()
 # Print
 print("\nOriginal vs Combined Distortion:\n")
 for i, score in enumerate(scores):
-    print(f"{df['text'][i][:40]}... → {score:.3f}")
+    print(f"{df['sentence'][i][:40]}... → {score:.3f}")
 
 # Plot
 plt.figure()
