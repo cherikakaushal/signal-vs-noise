@@ -2,10 +2,11 @@
 
 ## Original Sentence
 
-The experiments use ten short English-language headlines from
-`data/headlines.csv`. Each headline is treated as an undistorted reference. The
-dataset spans economics, healthcare, technology, climate, education, security,
-space, and biotechnology, providing varied but consistently brief samples.
+The experiments use ten short English-language sentences from
+`data/sentences.csv`. Each sentence is treated as an undistorted reference. The
+dataset includes medical, scientific, system-status, economics, healthcare,
+technology, climate, education, AI, and cybersecurity examples, providing varied
+but consistently brief samples.
 
 ## Distortion Techniques
 
