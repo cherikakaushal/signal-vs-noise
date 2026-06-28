@@ -6,7 +6,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
 # Load data
-df = pd.read_csv("data/headlines.csv")
+df = pd.read_csv("data/sentences.csv")
 
 # Bias injection function
 def add_bias(text, bias_words=["crisis", "failure", "collapse"], intensity=5):
@@ -21,14 +21,14 @@ def add_bias(text, bias_words=["crisis", "failure", "collapse"], intensity=5):
     return " ".join(words)
 
 # Apply bias
-df["biased"] = df["text"].apply(lambda x: add_bias(x))
+df["biased"] = df["sentence"].apply(lambda x: add_bias(x))
 
 # Vectorize
 vectorizer = TfidfVectorizer()
-combined = pd.concat([df["text"], df["biased"]])
+combined = pd.concat([df["sentence"], df["biased"]])
 vectorizer.fit(combined)
 
-X = vectorizer.transform(df["text"])
+X = vectorizer.transform(df["sentence"])
 X_biased = vectorizer.transform(df["biased"])
 
 # Similarity
@@ -38,7 +38,7 @@ scores = similarity.diagonal()
 # Print
 print("\nOriginal vs Biased Similarity:\n")
 for i, score in enumerate(scores):
-    print(f"{df['text'][i][:40]}... → {score:.3f}")
+    print(f"{df['sentence'][i][:40]}... → {score:.3f}")
 
 # Plot
 plt.figure()
